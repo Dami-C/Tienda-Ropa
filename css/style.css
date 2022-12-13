@@ -1,0 +1,123 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Kdam Thmor Pro", sans-serif;
+}
+
+body {
+    background: linear-gradient(rgb(255, 255, 255), rgb(114, 114, 114));
+}
+
+.trabajos__title {
+    margin-top: 100px;
+    margin-left: 50px;
+}
+
+.grid__layout {
+    display: grid;
+    width: 100%;
+    grid-auto-rows: 27rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 15px;
+    grid-row-gap: 10px;
+    margin: 50px auto;
+    justify-items: center;
+}
+
+@media screen and ( max-width : 992px ) {
+    .grid__layout {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and ( max-width : 660px ) {
+    .grid__layout {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and ( max-width : 420px ) {
+    .form-checkout {
+        padding: 8px;
+        width: 100%;
+    }
+
+    div.form-checkout p {
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    table {
+        margin: 0 auto;
+        width: 100% !important;
+        margin-bottom: 60px;
+    }
+}
+
+
+
+.cajaCarrito{
+    display: flex;
+    justify-content: end;
+    margin-top: 10vh;
+    margin-right: 4vw;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cajaBuscar {
+    margin-right: 3vw;
+}
+
+.cajaFooter {
+    display: flex;
+    justify-content: center;
+}
+
+#btnComprar:hover {
+    background-color: darkviolet;
+}
+
+#btnComprar:active {
+    background-color: black;
+}
+
+thead tr {
+    background-color: darkmagenta;
+    color: white;
+}
+
+#tablehead {
+    padding: 10px;
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(173, 216, 230, 0.252) !important;
+}
+
+.sectionCompras {
+    width: 75vw;
+    display: flex;
+    height: 30vh;
+    justify-content: center;
+    margin-left: 14vw;
+    margin-top: 10vh;
+}
+
+.cesto {
+    margin-left: 2vw;
+}
+
+.btn-comprar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#nav-modif {
+    flex-wrap: nowrap;
+}
