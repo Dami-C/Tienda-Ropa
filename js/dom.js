@@ -2,7 +2,7 @@
 const imgCarrito = document.getElementById("imgCarrito")
 const bolsaCompras = document.getElementById("bolsaCompras")
 const footer = document.getElementById("footer")
-const container = document.getElementById("container2")
+const container = document.getElementById("cajaPrendas")
 const inputSearch = document.querySelector("input#inputSearch")
 // const URL = 'bbdd/productos.json'
 
@@ -10,6 +10,7 @@ const inputSearch = document.querySelector("input#inputSearch")
 titulo.innerText = "Vestite Rey"
 imgCarrito.src = "./assets/carrito.png"
 footer.innerHTML = "<p>Copyright Damian Cordeiro - <strong>Comisión 34095 JS</strong></p>" 
+
 
 imgCarrito.addEventListener("mousemove", ()=> {
     let totalProductos = carrito.length
@@ -19,28 +20,26 @@ imgCarrito.addEventListener("mousemove", ()=> {
 function cargarProductos(array) {
     let contenido = ""
         if (array.length > 0) {
-            array.forEach(prendas => {
-                contenido += retornoCard(prendas)
-            })
+            array.forEach(prendas => contenido += retornoCard(prendas))
             container.innerHTML = contenido
         }
 }
 cargarProductos(prendas)
 
 function activarClickBotones() {
-    const botonesAdd = document.getElementById("id")
-    botonesAdd.forEach(btn => {
-        btn.addEventListener("click", ()=> {
-            let resultado = prendas.find(prendas => prendas.id === parseInt(btn.id))
-            console.log(resultado)
-                carrito.push(resultado)
-                localStorage.setItem("miCarrito", JSON.stringify(carrito))
-                toast(`'${resultado.nombre}' se agregó al carrito`, 'green')
+    const botonesAdd = document.querySelectorAll("button.agregar.btn.btn-success")
+    botonesAdd.forEach(button => {
+        button.addEventListener("click", ()=> {
+            let resultado = prendas.find(prendas => prendas.id === parseInt(button.id))
+            
+                    carrito.push(resultado)
+                    localStorage.setItem("miCarrito", JSON.stringify(carrito))
+                    toast(`'${resultado.nombre}' se agregó al carrito`, 'green')
         })
     })
 }
 
-function filtrarProductos() { //Aplicamos operador ternario
+function filtrarProductos() { //
     let resultado = prendas.filter(prendas => prendas.nombre.toUpperCase().includes(inputSearch.value.toUpperCase().trim()))
         if (resultado.length > 0) {
             cargarProductos(resultado)
@@ -50,7 +49,7 @@ function filtrarProductos() { //Aplicamos operador ternario
         }
 }
 
-inputSearch.addEventListener("search", ()=> { //Aplicamos operador ternario
+inputSearch.addEventListener("search", ()=> { //
     inputSearch.value.trim() !== "" ? filtrarProductos() : cargarProductos(prendas)
 })
 
@@ -59,9 +58,9 @@ const toast = (text, bgcolor)=> {
         text: text,
         duration: 2000,
         close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
         style: { background: bgcolor || 'CornFlowerBlue', fontSize: '24px'}
     }).showToast();
 }

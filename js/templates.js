@@ -23,9 +23,9 @@ function retornoError() {
 
 function armarTablaCarrito(prendas) {
     return `<tr>
-                <td class="centrar img-xx-large">${prendas.imagen}</td>
+                <td class="centrar img-xx-large"><img src="${prendas.imagen}" alt="" style="width: 70px; height: 80px;"></td>
                 <td>${prendas.nombre}</td>
                 <td>${prendas.precio}</td>
-                <td><button class="button button-outline button-delete" id="${prendas.nombre}" title="Quitar del carrito">🗑</button></td>
+                <td><button><img class="cesto" src="./assets/cesto.png" width="25px;"></button></td>
             </tr>`
 }

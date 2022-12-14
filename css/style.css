@@ -76,6 +76,7 @@ body {
 .cajaFooter {
     display: flex;
     justify-content: center;
+    margin-top: 30vh;
 }
 
 #btnComprar:hover {

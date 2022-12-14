@@ -11,7 +11,7 @@ function recuperarCarrito() {
 recuperarCarrito()
 
 function activarClickBotones() {
-    const buttonsDelete = document.querySelectorAll("button button-outline button-delete")
+    const buttonsDelete = document.querySelectorAll("button.button-outlinebutton-delete")
     buttonsDelete.forEach(btn => {
         btn.addEventListener("click", ()=> {
             //buscar usando button.id el producto en el array carrito.
