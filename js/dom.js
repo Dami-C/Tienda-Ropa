@@ -1,4 +1,4 @@
-
+const card = document.getElementById("card")
 const imgCarrito = document.getElementById("imgCarrito")
 const bolsaCompras = document.getElementById("bolsaCompras")
 const footer = document.getElementById("footer")
@@ -17,6 +17,21 @@ imgCarrito.addEventListener("mousemove", ()=> {
         imgCarrito.title = `${totalProductos} productos en el carrito`
 })
 
+const carrito = JSON.parse(localStorage.getItem("miCarrito")) || []
+const guardarCarrito = ()=> {
+    if (carrito.length > 0) {
+        localStorage.setItem("miCarrito", JSON.stringify(carrito))
+    }
+}
+
+const recuperarCarrito = ()=> {
+        const tbody = document.querySelector("tbody")
+        return JSON.parse(localStorage.getItem("miCarrito")) || []
+}
+
+
+carrito.push(...recuperarCarrito())
+
 function cargarProductos(array) {
     let contenido = ""
         if (array.length > 0) {
@@ -24,19 +39,31 @@ function cargarProductos(array) {
             container.innerHTML = contenido
         }
 }
-cargarProductos(prendas)
+
 
 function activarClickBotones() {
     const botonesAdd = document.querySelectorAll("button.agregar.btn.btn-success")
     botonesAdd.forEach(button => {
         button.addEventListener("click", ()=> {
-            let resultado = prendas.find(prendas => prendas.id === parseInt(button.id))
-            
+            let resultado = buscarPrenda(button.id)
                     carrito.push(resultado)
-                    localStorage.setItem("miCarrito", JSON.stringify(carrito))
-                    toast(`'${resultado.nombre}' se agregó al carrito`, 'green')
+                    guardarCarrito()
+                    // localStorage.setItem("miCarrito", JSON.stringify(carrito))
+                    // toast(`'${resultado.nombre}' se agregó al carrito`, 'green')
         })
     })
+}
+
+cargarProductos(prendas)
+activarClickBotones()
+
+
+
+
+
+function buscarPrenda(id) {
+    let resultado = prendas.find(prenda => prenda.id === parseInt(id))
+    return resultado
 }
 
 function filtrarProductos() { //
@@ -53,14 +80,14 @@ inputSearch.addEventListener("search", ()=> { //
     inputSearch.value.trim() !== "" ? filtrarProductos() : cargarProductos(prendas)
 })
 
-const toast = (text, bgcolor)=> {
-    Toastify({
-        text: text,
-        duration: 2000,
-        close: true,
-        gravity: "top",
-        position: "right",
-        stopOnFocus: true,
-        style: { background: bgcolor || 'CornFlowerBlue', fontSize: '24px'}
-    }).showToast();
-}
+// const toast = (text, bgcolor)=> {
+//     Toastify({
+//         text: text,
+//         duration: 2000,
+//         close: true,
+//         gravity: "top",
+//         position: "right",
+//         stopOnFocus: true,
+//         style: { background: bgcolor || 'CornFlowerBlue', fontSize: '24px'}
+//     }).showToast();
+// }

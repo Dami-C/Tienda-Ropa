@@ -1,7 +1,3 @@
-const carrito = JSON.parse(localStorage.getItem("miCarrito")) || []
-const card = document.getElementById("card")
-
-
 function retornoCard({id, imagen, nombre, precio}) {
         return `<div class="card" id="card${id}" style="width: 18rem;">
                     <img src="${imagen}" class="card-img-top" alt="Card image cap">
