@@ -104,7 +104,7 @@ tbody tr:nth-child(even) {
     width: 75vw;
     display: flex;
     height: 30vh;
-    justify-content: center;
+    justify-content: space-evenly;
     margin-left: 14vw;
     margin-top: 10vh;
 }
@@ -116,7 +116,8 @@ tbody tr:nth-child(even) {
 .btn-comprar {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    align-self: end;
+    flex-direction: column;
 }
 
 #nav-modif {

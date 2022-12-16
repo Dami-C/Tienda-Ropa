@@ -1,22 +1,41 @@
-    function cargarTabla() {
-        let tablaHTML = ""
-        const tbody = document.querySelector("tbody")
-        const carrito = JSON.parse(localStorage.getItem("miCarrito"))
-
-        if (carrito.length > 0) {
-            carrito.forEach(prendas => tablaHTML += armarTablaCarrito(prendas))
-            tbody.innerHTML = tablaHTML
+function recuperarCarrito() {
+    let tablaHTML = ""
+    const tbody = document.querySelector("tbody")
+    const carrito = JSON.parse(localStorage.getItem("miCarrito"))
+    if (carrito.length > 0) {
+    carrito.forEach(prendas => tablaHTML += armarTablaCarrito(prendas))
     }
+    tbody.innerHTML = tablaHTML
+    calcularTotal()
+}
+recuperarCarrito()
+
+
+function calcularTotal() {
+    let total = document.querySelector("h3#total")
+    let totalCarrito = carrito.reduce((acc, prendas)=> acc + prendas.precio, 0)
+    total.innerText = `Total: $ ${totalCarrito.toLocaleString()}` 
 }
 
-    function activarClickBotones() {
-        const buttonsDelete = document.querySelectorAll("button.button-outlinebutton-delete")
-        buttonsDelete.forEach(btn => {
-        btn.addEventListener("click", ()=> {
-             //buscar usando button.id el producto en el array carrito.
-             //hay que utilizar findIndex() porque necesitamos el índice del producto
-             //luego con el método splice(), elimino el índice recuperado del carrito.
-             //debemos declarar carrito de forma GLOBAL.
-        })
+
+const btnComprar = document.querySelector("#btnComprar")
+
+btnComprar.addEventListener("click", ()=> {
+    Swal.fire({
+        icon: 'question',
+        title: '¿Confirmas la compra?',
+        showCancelButton: true,
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: `Cancel`,
     })
-}
+    .then(result =>{
+        if(result.isConfirmed){
+            localStorage.removeItem("carrito")
+            carrito.length = 0
+            Swal.fire("Gracias Por Elegirnos", '','','info')
+            .then(()=>{
+                location.href = './index.html'
+            })
+        }
+    })
+})
